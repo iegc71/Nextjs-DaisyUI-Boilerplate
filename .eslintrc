@@ -12,7 +12,8 @@
         "singleQuote": true,
         "endOfLine": "auto"
       }
-    ]
+    ],
+    "global-require": 0
   },
   "overrides": [
     // Configuration for TypeScript files
@@ -63,7 +64,12 @@
     // Configuration for testing
     {
       "files": ["**/*.test.ts", "**/*.test.tsx"],
-      "plugins": ["jest", "jest-formatting", "testing-library", "jest-dom"],
+      "plugins": [
+        "jest",
+        "jest-formatting",
+        "testing-library",
+        "jest-dom"
+      ],
       "extends": [
         "plugin:jest/recommended",
         "plugin:jest-formatting/recommended",
