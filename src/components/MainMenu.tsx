@@ -5,12 +5,39 @@ import { twMerge } from 'tailwind-merge';
 
 import MainMenuItems from './MainMenuItems';
 
-const MainMenu = ({ className = undefined }) => {
+type Props = {
+  className?: string;
+};
+const MainMenu: React.FC<Props> = ({ className }) => {
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = () => {
     setVisible(!visible);
   };
+
+  const ToggleButton: React.FC = () => (
+    <Button shape="square" color="ghost" onClick={toggleVisible}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        className="inline-block h-6 w-6 stroke-current"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </Button>
+  );
+
+  const Logo: React.FC = () => (
+    <Link href="/">
+      <a className="border-none text-xl font-bold text-white">DaisyUI</a>
+    </Link>
+  );
 
   return (
     <div>
@@ -21,26 +48,10 @@ const MainMenu = ({ className = undefined }) => {
         )}
       >
         <div className="flex-none pr-2 lg:hidden">
-          <Button shape="square" color="ghost" onClick={toggleVisible}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block h-6 w-6 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </Button>
+          <ToggleButton />
         </div>
         <div className="flex-1">
-          <Link href="/">
-            <a className="border-none font-bold text-white">MySite</a>
-          </Link>
+          <Logo />
         </div>
         <div className="hidden flex-none lg:block">
           <MainMenuItems />
