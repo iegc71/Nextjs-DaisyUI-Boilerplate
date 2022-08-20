@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
+import { AppConfig } from '@/utils/AppConfig';
 
 const Index = () => {
   const router = useRouter();
@@ -15,15 +16,21 @@ const Index = () => {
         />
       }
     >
-      <a
-        href="https://github.com/ixartz/Next-js-Boilerplate"
-        className="grid place-content-center border-none"
-      >
+      <div className="mx-auto max-w-screen-lg px-3 text-center">
+        <div className="border-b border-gray-300">
+          <div className="pt-16 pb-8">
+            <div className="text-3xl font-bold">{AppConfig.title}</div>
+            <div className="text-xl">{AppConfig.description}</div>
+          </div>
+        </div>
+      </div>
+      <div className="mx-auto">
         <img
           src={`${router.basePath}/assets/images/nextjstarter.jpeg`}
           alt="Nextjs starter banner"
+          className="mx-auto my-6"
         />
-      </a>
+      </div>
     </Main>
   );
 };

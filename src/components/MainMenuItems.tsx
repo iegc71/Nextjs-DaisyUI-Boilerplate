@@ -3,11 +3,13 @@ import { useRouter } from 'next/router';
 import { Menu } from 'react-daisyui';
 import { twMerge } from 'tailwind-merge';
 
-type IProps = {
+const MenuItem = ({
+  href = '/',
+  children,
+}: {
   href: string;
   children: React.ReactNode;
-};
-const MenuItem: React.FC<IProps> = ({ href = '/', children }) => {
+}) => {
   const router = useRouter();
   return (
     <Link href={href}>
@@ -23,10 +25,7 @@ const MenuItem: React.FC<IProps> = ({ href = '/', children }) => {
   );
 };
 
-type Props = {
-  horizontal?: boolean;
-};
-const MainMenuItems: React.FC<Props> = ({ horizontal = true }) => {
+const MainMenuItems = ({ horizontal = true }: { horizontal?: boolean }) => {
   return (
     <Menu horizontal={horizontal}>
       <Menu.Item>
