@@ -1,16 +1,9 @@
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { Button, Dropdown, Modal, Navbar } from 'react-daisyui';
+import React from 'react';
+import { Button, Dropdown, Navbar } from 'react-daisyui';
 import { twMerge } from 'tailwind-merge';
 
 import LightDarkSelector from './LightDarkSelector';
-import MainMenuItems from './MainMenuItems';
 
-const Logo = () => (
-  <Link href="/">
-    <a className="border-none text-xl font-bold text-white">DaisyUI</a>
-  </Link>
-);
 const Profile = () => (
   <Dropdown vertical="end">
     <Button color="ghost" className="avatar" shape="circle">
@@ -50,21 +43,22 @@ const SearchButton = () => (
   </Button>
 );
 
-const MainMenu = ({
+const AdminNavBar = ({
   className,
+  toggleDrawer,
   ...args
 }: {
   className?: string;
   args?: React.ReactNode;
+  toggleDrawer: any;
 }) => {
-  const [visible, setVisible] = useState(false);
-
-  const toggleVisible = () => {
-    setVisible(!visible);
-  };
-
   const ToggleButton = (tbArgs: any) => (
-    <Button shape="square" color="ghost" onClick={toggleVisible} {...tbArgs}>
+    <Button
+      shape="square"
+      color="ghost"
+      onClick={() => toggleDrawer()}
+      {...tbArgs}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -80,21 +74,7 @@ const MainMenu = ({
       </svg>
     </Button>
   );
-  const FloatMenu = () => (
-    <Modal
-      open={visible}
-      onClickBackdrop={toggleVisible}
-      className="bg-primary"
-    >
-      <Modal.Header className="mb-3 border-b-2 border-b-white/20 pb-3 font-bold text-white">
-        Main Menu
-      </Modal.Header>
 
-      <Modal.Body>
-        <MainMenuItems horizontal={false} />
-      </Modal.Body>
-    </Modal>
-  );
   return (
     <div>
       <Navbar
@@ -102,13 +82,8 @@ const MainMenu = ({
         className={twMerge(className, 'bg-primary text-primary-content')}
       >
         <Navbar.Start>
-          <ToggleButton className="mr-3 lg:hidden" />
-          <Logo />
+          <ToggleButton className="mr-3 lg:invisible" />
         </Navbar.Start>
-
-        <Navbar.Center className="hidden lg:flex">
-          <MainMenuItems />
-        </Navbar.Center>
 
         <Navbar.End className="navbar-end">
           <SearchButton />
@@ -116,8 +91,7 @@ const MainMenu = ({
           <Profile />
         </Navbar.End>
       </Navbar>
-      <FloatMenu />
     </div>
   );
 };
-export default MainMenu;
+export default AdminNavBar;
